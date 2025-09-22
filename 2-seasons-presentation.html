@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 Seasons - Africa's First Regenerative Innovation & Lifestyle Village</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .slide h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 2rem;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .slide h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #2d5016;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .slide h3 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #2d5016;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .slide p {
+            font-size: 1.5rem;
+            color: #666;
+            text-align: center;
+            max-width: 800px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 1.1s both;
+        }
+
+        .tagline {
+            font-size: 2rem;
+            font-style: italic;
+            color: #d4af37;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 1.3s both;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            width: 100%;
+            max-width: 1400px;
+            margin-top: 3rem;
+        }
+
+        .content-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .content-item:nth-child(1) { animation-delay: 0.5s; }
+        .content-item:nth-child(2) { animation-delay: 0.7s; }
+        .content-item:nth-child(3) { animation-delay: 0.9s; }
+        .content-item:nth-child(4) { animation-delay: 1.1s; }
+
+        .content-item h4 {
+            font-size: 1.8rem;
+            color: #2d5016;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .content-item p {
+            font-size: 1.1rem;
+            color: #666;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.5s; }
+        .stat-item:nth-child(2) { animation-delay: 0.7s; }
+        .stat-item:nth-child(3) { animation-delay: 0.9s; }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #2d5016;
+            font-weight: 600;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2d5016, #d4af37);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out both;
+            width: 200px;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.7s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.9s; }
+        .timeline-item:nth-child(4) { animation-delay: 1.1s; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: #d4af37;
+            border-radius: 50%;
+            border: 4px solid #fff;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2d5016;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: #d4af37;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            z-index: 1000;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 2rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out 1.3s both;
+        }
+
+        .chart-bar {
+            height: 20px;
+            background: linear-gradient(90deg, #2d5016, #d4af37);
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: slideInLeft 1.5s ease-out both;
+        }
+
+        .chart-bar:nth-child(1) { animation-delay: 0.5s; }
+        .chart-bar:nth-child(2) { animation-delay: 0.7s; }
+        .chart-bar:nth-child(3) { animation-delay: 0.9s; }
+        .chart-bar:nth-child(4) { animation-delay: 1.1s; }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 0.5s; }
+        .feature-item:nth-child(2) { animation-delay: 0.7s; }
+        .feature-item:nth-child(3) { animation-delay: 0.9s; }
+        .feature-item:nth-child(4) { animation-delay: 1.1s; }
+        .feature-item:nth-child(5) { animation-delay: 1.3s; }
+        .feature-item:nth-child(6) { animation-delay: 1.5s; }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #2d5016, #d4af37);
+            color: #fff;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 3rem;
+            animation: fadeInUp 1s ease-out 1.5s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(45, 80, 22, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">11</span>
+        </div>
+
+        <!-- Slide 1: Cover Slide -->
+        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/drone-image.jpg');">
+            <img src="images/2seasons-logo.jpg" alt="2 Seasons Logo" class="logo">
+            <h1>2 Seasons</h1>
+            <p class="tagline">Where Luxury Meets Regeneration</p>
+            <p>Africa's First Regenerative Innovation & Lifestyle Village</p>
+        </div>
+
+        <!-- Slide 2: Vision Slide -->
+        <div class="slide" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <h2>Our Vision</h2>
+            <p>Building Africa's first regenerative lifestyle and innovation village that combines luxury living with sustainable development, creating a model for future communities across the continent.</p>
+            <div class="content-grid">
+                <div class="content-item">
+                    <h4>Regenerative Living</h4>
+                    <p>Creating communities that give back more to the environment than they take</p>
+                </div>
+                <div class="content-item">
+                    <h4>Innovation Hub</h4>
+                    <p>Fostering creativity and technological advancement in a sustainable environment</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Market Opportunity -->
+        <div class="slide" style="background-image: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <h2>Market Opportunity</h2>
+            <p>Nigeria's real estate and creative economy are experiencing unprecedented growth</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">$2.1B</div>
+                    <div class="stat-label">Real Estate Market Size</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15%</div>
+                    <div class="stat-label">Annual Growth Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$1.2B</div>
+                    <div class="stat-label">Creative Economy Value</div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <h3>Market Growth Projection</h3>
+                <div class="chart-bar" style="width: 85%;">Real Estate Sector</div>
+                <div class="chart-bar" style="width: 70%;">Creative Industries</div>
+                <div class="chart-bar" style="width: 60%;">Wellness & Tourism</div>
+                <div class="chart-bar" style="width: 45%;">Tech Innovation</div>
+            </div>
+        </div>
+
+        <!-- Slide 4: The Masterplan -->
+        <div class="slide" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/site-plans.jpg');">
+            <h2>The Masterplan</h2>
+            <p>Four integrated components creating a complete regenerative ecosystem</p>
+            <div class="content-grid">
+                <div class="content-item" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/bf-3.jpg'); background-size: cover; background-position: center;">
+                    <h4>🏡 2 Seasons Residential</h4>
+                    <p>Luxury eco-friendly homes with smart technology and sustainable design</p>
+                </div>
+                <div class="content-item" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/allocation-1.jpg'); background-size: cover; background-position: center;">
+                    <h4>🏰 True Vine Villas</h4>
+                    <p>Premium vacation rentals and short-term accommodation for tourists and business travelers</p>
+                </div>
+                <div class="content-item" style="background-image: url('images/welness-hub.JPG'); background-size: cover; background-position: center;">
+                    <h4>🧘 Wellness Hub</h4>
+                    <p>Comprehensive wellness center with spa, fitness, and holistic health services</p>
+                </div>
+                <div class="content-item" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/sportsacademy.jpg'); background-size: cover; background-position: center;">
+                    <h4>🏙️ Hygge Town</h4>
+                    <p>Creative district with studios, co-working spaces, and innovation labs</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Unique Features -->
+        <div class="slide" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/plantsin2seasons.jpg');">
+            <h2>Unique Features</h2>
+            <p>What sets 2 Seasons apart in the market</p>
+            <div class="feature-grid">
+                <div class="feature-item" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/anotherplant.jpg'); background-size: cover; background-position: center;">
+                    <div class="feature-icon">🌱</div>
+                    <h4>Sustainability</h4>
+                    <p>Net-zero carbon footprint with renewable energy and waste management systems</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💆</div>
+                    <h4>Wellness Focus</h4>
+                    <p>Integrated wellness programs and natural healing environments</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <h4>Creator Zones</h4>
+                    <p>Dedicated spaces for artists, entrepreneurs, and innovators to thrive</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏢</div>
+                    <h4>Innovation Hubs</h4>
+                    <p>State-of-the-art facilities for tech startups and research organizations</p>
+                </div>
+                <div class="feature-item" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/bf-2.jpg'); background-size: cover; background-position: center;">
+                    <div class="feature-icon">🏖️</div>
+                    <h4>Luxury Living</h4>
+                    <p>Premium amenities and services for discerning residents and guests</p>
+                </div>
+                <div class="feature-item" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/tomato-1.jpg'); background-size: cover; background-position: center;">
+                    <div class="feature-icon">🌍</div>
+                    <h4>Community Impact</h4>
+                    <p>Creating positive social and environmental impact in the region</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Target Market -->
+        <div class="slide" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/plantain-1.jpg');">
+            <h2>Target Market</h2>
+            <p>Diverse demographic segments with shared values of sustainability and innovation</p>
+            <div class="content-grid">
+                <div class="content-item">
+                    <h4>🌍 Diaspora Community</h4>
+                    <p>Nigerians abroad seeking premium real estate investments and vacation homes</p>
+                </div>
+                <div class="content-item">
+                    <h4>💼 Middle Class Professionals</h4>
+                    <p>Growing middle class looking for sustainable luxury living options</p>
+                </div>
+                <div class="content-item">
+                    <h4>👑 Elite & HNWI</h4>
+                    <p>High net worth individuals seeking exclusive, environmentally conscious properties</p>
+                </div>
+                <div class="content-item">
+                    <h4>🎨 Creators & Entrepreneurs</h4>
+                    <p>Artists, innovators, and business leaders attracted to creative communities</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Revenue Streams -->
+        <div class="slide" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <h2>Revenue Streams</h2>
+            <p>Multiple income sources ensuring sustainable financial growth</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">40%</div>
+                    <div class="stat-label">Property Sales</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">25%</div>
+                    <div class="stat-label">Villa Rentals</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-label">Wellness Services</div>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="content-item">
+                    <h4>🏠 Property Sales</h4>
+                    <p>Direct sales of residential units and commercial spaces</p>
+                </div>
+                <div class="content-item">
+                    <h4>🏨 Villa Rentals (Airbnb)</h4>
+                    <p>Short-term rental income from vacation properties</p>
+                </div>
+                <div class="content-item">
+                    <h4>💆 Wellness Services</h4>
+                    <p>Membership fees and service charges from wellness hub</p>
+                </div>
+                <div class="content-item">
+                    <h4>🏢 Studio/Innovation Hub Leasing</h4>
+                    <p>Monthly rental income from creative and tech spaces</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Investment Phases -->
+        <div class="slide" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/2-seasons-map.JPG');">
+            <h2>Investment Phases</h2>
+            <p>Phased development approach ensuring controlled growth and risk management</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Phase 1</h4>
+                    <p>74 Acres<br>Infrastructure & Core Facilities</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Phase 2</h4>
+                    <p>Residential<br>Development</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Phase 3</h4>
+                    <p>Commercial<br>& Wellness Hub</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Phase 4</h4>
+                    <p>Innovation<br>District</p>
+                </div>
+            </div>
+            <div class="chart-container">
+                <h3>Development Timeline</h3>
+                <div class="chart-bar" style="width: 25%;">Phase 1: Foundation (Year 1-2)</div>
+                <div class="chart-bar" style="width: 50%;">Phase 2: Residential (Year 2-4)</div>
+                <div class="chart-bar" style="width: 75%;">Phase 3: Commercial (Year 4-6)</div>
+                <div class="chart-bar" style="width: 100%;">Phase 4: Innovation (Year 6-8)</div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Financial Projections -->
+        <div class="slide" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <h2>Financial Projections</h2>
+            <p>Strong returns and capital appreciation potential</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">25%</div>
+                    <div class="stat-label">Annual ROI</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">300%</div>
+                    <div class="stat-label">5-Year Appreciation</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$50M</div>
+                    <div class="stat-label">Total Investment</div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <h3>Revenue Growth Projection</h3>
+                <div class="chart-bar" style="width: 20%;">Year 1: $2M</div>
+                <div class="chart-bar" style="width: 40%;">Year 2: $8M</div>
+                <div class="chart-bar" style="width: 60%;">Year 3: $15M</div>
+                <div class="chart-bar" style="width: 80%;">Year 4: $25M</div>
+                <div class="chart-bar" style="width: 100%;">Year 5: $40M</div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Team & Partners -->
+        <div class="slide" style="background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <h2>Team & Partners</h2>
+            <p>Experienced leadership and strategic partnerships driving success</p>
+            <div class="content-grid">
+                <div class="content-item">
+                    <h4>👥 Founding Team</h4>
+                    <p>Visionary leaders with combined 50+ years in real estate, sustainability, and innovation</p>
+                </div>
+                <div class="content-item">
+                    <h4>🏗️ Development Partners</h4>
+                    <p>Leading construction and architecture firms specializing in sustainable development</p>
+                </div>
+                <div class="content-item">
+                    <h4>💰 Financial Partners</h4>
+                    <p>Established financial institutions and investment firms supporting the project</p>
+                </div>
+                <div class="content-item">
+                    <h4>🌱 Sustainability Partners</h4>
+                    <p>Environmental consultants and green technology providers ensuring regenerative practices</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Call to Action -->
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/drone-image.jpg');">
+            <h1>Invest in 2 Seasons</h1>
+            <p class="tagline">Build the Future with Us</p>
+            <p>Join us in creating Africa's first regenerative innovation and lifestyle village</p>
+            <button class="cta-button">Start Your Investment Journey</button>
+            <div class="content-grid" style="margin-top: 4rem;">
+                <div class="content-item">
+                    <h4>📧 Contact Us</h4>
+                    <p>info@2seasons.africa</p>
+                </div>
+                <div class="content-item">
+                    <h4>📱 Get Updates</h4>
+                    <p>Follow our journey on social media</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn">‹</button>
+            <button class="nav-btn" id="nextBtn">›</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].classList.add('prev');
+            
+            currentSlide = (n + totalSlides) % totalSlides;
+            
+            slides[currentSlide].classList.remove('prev');
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+        document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Auto-advance slides (optional)
+        // setInterval(nextSlide, 10000); // Uncomment for auto-advance every 10 seconds
+    </script>
+</body>
+</html>
