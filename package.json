@@ -1,0 +1,13 @@
+{
+  "name": "2-seasons-presentation",
+  "version": "1.0.0",
+  "description": "2 Seasons - Africa's First Regenerative Innovation & Lifestyle Village Presentation",
+  "main": "2-seasons-presentation.html",
+  "scripts": {
+    "start": "serve -s .",
+    "build": "echo 'No build step required'"
+  },
+  "keywords": ["presentation", "real-estate", "renewable-energy", "africa", "investment"],
+  "author": "2 Seasons",
+  "license": "MIT"
+}
